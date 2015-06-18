@@ -15,21 +15,21 @@ This is a simple Python library for dealing with the /etc/network/interfaces fil
 
 ## Example usage:
 
-    import debinterface
+    from debinterface.interfaces import Interfaces
 
     # Get a collection of objects representing the network adapters.
-    adapters = debinterface.Interfaces().adapters
+    interfaces = Interfaces()
 
     # You get a list you can iterare over.
     # Each adapter has an 'export()' method that returns a dictionary of its options.
     # You can print the name of each adapter as follows:
-    for adapter in adapters:
+    for adapter in interfaces.adapters:
     	item = adapter.export()
     	print(item['name'])
 
     # Write your new interfaces file as follows:
     # Any changes made with setter methods will be reflected with the new write.
-    interfaces = debinterface.Interfaces()
+    interfaces = Interfaces()
     interfaces.writeInterfaces()
 
     # A backup of your old interfaces file will be generated when writing over the previous interfaces file
@@ -37,8 +37,8 @@ This is a simple Python library for dealing with the /etc/network/interfaces fil
     # INTERFACES_PATH='/etc/network/interfaces'
     # BACKUP_PATH='/etc/network/interfaces.old'
     # Paths can be customized when instanciating the Interfaces class:
-    interfaces = debinterface.Interfaces(interfaces_path='/home/interfaces', backup_path='/another/custom/path')
+    interfaces = Interfaces(interfaces_path='/home/interfaces', backup_path='/another/custom/path')
 
     # By defaults, interfaces file is read when instanciating the Interfaces class, to do it lazyly:
-    interfaces = debinterface.Interfaces(update_adapters=False)
+    interfaces = Interfaces(update_adapters=False)
     interfaces.updateAdapters()
